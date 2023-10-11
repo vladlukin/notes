@@ -1,5 +1,6 @@
 # app.py
 from flask import Flask, request, jsonify
+from notes_dao import add_note
 
 app = Flask(__name__)
 
@@ -41,3 +42,17 @@ def add_country():
         return country, 201
     return {"error": "Request must be JSON"}, 415
 
+@app.get("/add-note-test/<body>")
+def add_note_test(body):
+    account_id = 1
+    add_note(account_id, body)
+    return {"status": "success"}, 200
+
+@app.post("/add-note")
+def add_note_test(body):
+    account_id = 1
+    add_note(account_id, body)
+    return {"status": "success"}, 200
+
+
+app.run(host='::', port=5000, debug=True)
